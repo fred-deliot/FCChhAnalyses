@@ -91,24 +91,24 @@ source = cfg.Analyzer(
     muons = 'muons',
 
     #main jets trk08
-    trkjets08  = 'trkjets08',
-    trkbTags08 = 'trkbTags08',
+#    trkjets08  = 'trkjets08',
+#    trkbTags08 = 'trkbTags08',
 
-    trkjetsOneSubJettiness08    = 'trkjetsOneSubJettiness08',
-    trkjetsTwoSubJettiness08    = 'trkjetsTwoSubJettiness08',
-    trkjetsThreeSubJettiness08  = 'trkjetsThreeSubJettiness08',
-    trksubjetsSoftDropTagged08  = 'trksubjetsSoftDropTagged08',
-    trksubjetsSoftDrop08        = 'trksubjetsSoftDrop08',
+#    trkjetsOneSubJettiness08    = 'trkjetsOneSubJettiness08',
+#    trkjetsTwoSubJettiness08    = 'trkjetsTwoSubJettiness08',
+#    trkjetsThreeSubJettiness08  = 'trkjetsThreeSubJettiness08',
+#    trksubjetsSoftDropTagged08  = 'trksubjetsSoftDropTagged08',
+#    trksubjetsSoftDrop08        = 'trksubjetsSoftDrop08',
   
     #pf jets pf08 for correction
-    pfjets08  = 'pfjets08',
-    pfbTags08 = 'pfbTags08',
+#    pfjets08  = 'pfjets08',
+#    pfbTags08 = 'pfbTags08',
 
-    pfjetsOneSubJettiness08    = 'pfjetsOneSubJettiness08',
-    pfjetsTwoSubJettiness08    = 'pfjetsTwoSubJettiness08',
-    pfjetsThreeSubJettiness08  = 'pfjetsThreeSubJettiness08',
-    pfsubjetsSoftDropTagged08  = 'pfsubjetsSoftDropTagged08',
-    pfsubjetsSoftDrop08        = 'pfsubjetsSoftDrop08',
+#    pfjetsOneSubJettiness08    = 'pfjetsOneSubJettiness08',
+#    pfjetsTwoSubJettiness08    = 'pfjetsTwoSubJettiness08',
+#    pfjetsThreeSubJettiness08  = 'pfjetsThreeSubJettiness08',
+#    pfsubjetsSoftDropTagged08  = 'pfsubjetsSoftDropTagged08',
+#    pfsubjetsSoftDrop08        = 'pfsubjetsSoftDrop08',
 
 
     # used for b-tagging
@@ -147,56 +147,56 @@ jets_trk08_20 = cfg.Analyzer(
     filter_func = lambda jet: jet.pt()>20
 )
 
-# select pf04 jets above 20 GeV for direct b-tagging
-jets_pf04_20 = cfg.Analyzer(
+# select pf04 jets above 60 GeV for direct b-tagging
+jets_pf04 = cfg.Analyzer(
     Selector,
-    'jets_pf04_20',
-    output = 'jets_pf04_20',
+    'jets_pf04',
+    output = 'jets_pf04',
     input_objects = 'pfjets04',
-    filter_func = lambda jet: jet.pt()>20
+    filter_func = lambda jet: jet.pt()>60
 )
 
 # apply jet flavour tagging
 from heppy.FCChhAnalyses.analyzers.FlavourTagger import FlavourTagger
-jets_pf04_20_pdg = cfg.Analyzer(
+jets_pf04_pdg = cfg.Analyzer(
     FlavourTagger,
-    'jets_pf04_20_pdg',
-    input_jets = 'jets_pf04_20',
+    'jets_pf04_pdg',
+    input_jets = 'jets_pf04',
     input_genparticles = 'gen_particles',
-    output_jets = 'jets_pf04_20_pdg',
+    output_jets = 'jets_pf04_pdg',
     dr_match = 0.4,
     pdg_tags = [5, 4, 0],
     ptr_min = 0.1,
 )
 
-# select electrons above 100 GeV
-electrons_100 = cfg.Analyzer(
+# select electrons above 20 GeV
+electrons_20 = cfg.Analyzer(
     Selector,
-    'electrons_100',
-    output = 'electrons_100',
+    'electrons_20',
+    output = 'electrons_20',
     input_objects = 'electrons',
-    filter_func = lambda electron: electron.pt()>100.
+    filter_func = lambda electron: electron.pt()>20.
 )
 
-# select muons above 100 GeV
-muons_100 = cfg.Analyzer(
+# select muons above 20 GeV
+muons_20 = cfg.Analyzer(
     Selector,
-    'muons_100',
-    output = 'muons_100',
+    'muons_20',
+    output = 'muons_20',
     input_objects = 'muons',
-    filter_func = lambda muon: muon.pt()>100.
+    filter_func = lambda muon: muon.pt()>20.
 )
 
 # produce flat root tree containing jet substructure information
 from heppy.FCChhAnalyses.FCChh.tttt.TreeProducer import TreeProducer
 tree = cfg.Analyzer(
     TreeProducer,
-    jets_trk08_20 = 'jets_trk08_20',
-    jets_pf04_20  = 'jets_pf04_20',
-    jets_pf08_30  = 'jets_pf08_30',
+#    jets_trk08_20 = 'jets_trk08_20',
+    jets_pf04  = 'jets_pf04',
+#    jets_pf08_30  = 'jets_pf08_30',
 
-    electrons = 'electrons_100',
-    muons = 'muons_100',
+    electrons = 'electrons_20',
+    muons = 'muons_20',
 
 )
 
@@ -205,14 +205,14 @@ tree = cfg.Analyzer(
 # the analyzers will process each event in this order
 sequence = cfg.Sequence( [
     source,
-    jets_pf08_30,
-    jets_pf04_20,
-    jets_pf04_20_pdg,
+#    jets_pf08_30,
+    jets_pf04,
+    jets_pf04_pdg,
 
-    jets_trk08_20,
+#    jets_trk08_20,
 
-    electrons_100,
-    muons_100,
+    electrons_20,
+    muons_20,
     tree,
     ] )
 
