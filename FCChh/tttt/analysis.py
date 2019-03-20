@@ -91,24 +91,24 @@ source = cfg.Analyzer(
     muons = 'muons',
 
     #main jets trk08
-#    trkjets08  = 'trkjets08',
-#    trkbTags08 = 'trkbTags08',
+    trkjets08  = 'trkjets08',
+    trkbTags08 = 'trkbTags08',
 
-#    trkjetsOneSubJettiness08    = 'trkjetsOneSubJettiness08',
-#    trkjetsTwoSubJettiness08    = 'trkjetsTwoSubJettiness08',
-#    trkjetsThreeSubJettiness08  = 'trkjetsThreeSubJettiness08',
-#    trksubjetsSoftDropTagged08  = 'trksubjetsSoftDropTagged08',
-#    trksubjetsSoftDrop08        = 'trksubjetsSoftDrop08',
-  
+    trkjetsOneSubJettiness08    = 'trkjetsOneSubJettiness08',
+    trkjetsTwoSubJettiness08    = 'trkjetsTwoSubJettiness08',
+    trkjetsThreeSubJettiness08  = 'trkjetsThreeSubJettiness08',
+    trksubjetsSoftDropTagged08  = 'trksubjetsSoftDropTagged08',
+    trksubjetsSoftDrop08        = 'trksubjetsSoftDrop08',
+ 
     #pf jets pf08 for correction
-#    pfjets08  = 'pfjets08',
-#    pfbTags08 = 'pfbTags08',
+    pfjets08  = 'pfjets08',
+    pfbTags08 = 'pfbTags08',
 
-#    pfjetsOneSubJettiness08    = 'pfjetsOneSubJettiness08',
-#    pfjetsTwoSubJettiness08    = 'pfjetsTwoSubJettiness08',
-#    pfjetsThreeSubJettiness08  = 'pfjetsThreeSubJettiness08',
-#    pfsubjetsSoftDropTagged08  = 'pfsubjetsSoftDropTagged08',
-#    pfsubjetsSoftDrop08        = 'pfsubjetsSoftDrop08',
+    pfjetsOneSubJettiness08    = 'pfjetsOneSubJettiness08',
+    pfjetsTwoSubJettiness08    = 'pfjetsTwoSubJettiness08',
+    pfjetsThreeSubJettiness08  = 'pfjetsThreeSubJettiness08',
+    pfsubjetsSoftDropTagged08  = 'pfsubjetsSoftDropTagged08',
+    pfsubjetsSoftDrop08        = 'pfsubjetsSoftDrop08',
 
 
     # used for b-tagging
@@ -191,9 +191,9 @@ muons_20 = cfg.Analyzer(
 from heppy.FCChhAnalyses.FCChh.tttt.TreeProducer import TreeProducer
 tree = cfg.Analyzer(
     TreeProducer,
-#    jets_trk08_20 = 'jets_trk08_20',
+    jets_trk08_20 = 'jets_trk08_20',
     jets_pf04  = 'jets_pf04',
-#    jets_pf08_30  = 'jets_pf08_30',
+    jets_pf08_30  = 'jets_pf08_30',
 
     electrons = 'electrons_20',
     muons = 'muons_20',
@@ -205,11 +205,11 @@ tree = cfg.Analyzer(
 # the analyzers will process each event in this order
 sequence = cfg.Sequence( [
     source,
-#    jets_pf08_30,
+    jets_pf08_30,
     jets_pf04,
     jets_pf04_pdg,
 
-#    jets_trk08_20,
+    jets_trk08_20,
 
     electrons_20,
     muons_20,
