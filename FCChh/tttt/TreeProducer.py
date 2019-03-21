@@ -50,6 +50,9 @@ class TreeProducer(Analyzer):
 
 	self.tree.var('Ht',float)
 
+	self.tree.var('Jet_pt',float)
+	self.tree.var('Lep_pt',float)
+
         self.tree.var('Jet1_dR_lep', float)
         self.tree.var('Jet2_dR_lep', float)
         self.tree.var('Jet3_dR_lep', float)
@@ -298,6 +301,14 @@ class TreeProducer(Analyzer):
              if ( len(muons) >=2 ): fillParticle(self.tree, 'Muon2', muons[1])
              if ( len(muons) >=3 ): fillParticle(self.tree, 'Muon3', muons[2])
 
+	     for jet in jets_pf04:
+	        self.tree.fill('Jet_pt',jet.pt())
+
+	     for el in electrons:
+	        self.tree.fill('Lep_pt',el.pt())
+	    
+	     for mu in muons:
+		self.tree.fill('Lep_pt',mu.pt())
 
 	     self.tree.fill('Ht',Ht)
 
